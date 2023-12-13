@@ -54,7 +54,7 @@ The chosen metric for model evaluation is accuracy, as it measures the proportio
 
 ## Justification for Metric Choice
 
-Accuracy is suitable for this classification problem because it allows for a clear understanding of the model's ability to correctly identify the cause category of major power outages. However, in cases of imbalanced classes, additional metrics such as precision, recall, or F1-score may be considered to provide a more nuanced evaluation of the model's performance across different cause categories.
+Accuracy is justified as the primary evaluation metric because it directly aligns with the goal of correctly classifying the causes of power outages. Given the importance of accurate predictions for informing preventive measures, a high accuracy score indicates the model's effectiveness in identifying the underlying patterns and trends in the data. However, it is essential to consider potential class imbalances and explore additional metrics, such as precision, recall, and F-1 score, to ensure a comprehensive understanding of the model's performance.
 
 ---
 
