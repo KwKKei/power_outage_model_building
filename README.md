@@ -149,7 +149,9 @@ Alternative Hypothesis: The model is unfair. The accuracy for high-severity majo
 
 ### Calculation of p-value
 
+
 <iframe src="asset/p_graph.html" width=800 height=600 frameBorder=0></iframe>
+
 
 A permutation test is conducted by shuffing the `'HIGH_SEVERITY'` column in the dataset and calculating the fairness metric for 1000 iterations. The p-value is then deteremined as the proportion of shuffled fairness metric. And the resulting p-value is 0.011.
 
