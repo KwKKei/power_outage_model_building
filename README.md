@@ -114,7 +114,7 @@ The final model, aiming to predict the cause categories of major power outages, 
 
 
 ### Model Performance
-Hyperparameter tuning was performed using GridSearchCV, optimizing parameters such as 'n_estimators', 'max_depth', and 'min_samples_split' for the RandomForestClassifier. The best hyperparameters were found to be {'max_depth': 32, 'min_samples_split': 16, 'n_estimators': 12}. The final model achieved an accuracy of 78.42% on the test set, showcasing a substantial improvement over the baseline model. 
+Hyperparameter tuning was performed using GridSearchCV, optimizing parameters such as 'n_estimators', 'max_depth', and 'min_samples_split' for the RandomForestClassifier. The best hyperparameters were found to be {'max_depth': 7, 'min_samples_split': 6, 'n_estimators': 42}. The final model achieved an accuracy of 78.42% on the test set, showcasing a substantial improvement over the baseline model. 
 
 ![](asset/confusionmatrix_final.jpg)
 
