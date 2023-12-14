@@ -71,7 +71,7 @@ For encoding, the model applies one-hot encoding to the categorical feature `'HI
 
 ![](asset/base_model_test_accuracy.jpg)
 
-The model achieved a test accuracy of 55%. The classification report provides additional insights into precision, recall, and F1-score for each cause category, indicating variable performance across different classes. The confusion matrix visualizes the model's predictions against the actual values, highlighting areas of correct and incorrect classification.
+The model achieved a test accuracy of 56%. The classification report provides additional insights into precision, recall, and F1-score for each cause category, indicating variable performance across different classes. The confusion matrix visualizes the model's predictions against the actual values, highlighting areas of correct and incorrect classification.
 
 The model, that is shown in a form of confusion matrix, is showing the distribution of the cause category in major power outage as below:
 ![](asset/confusionmatrix_base.jpg)
@@ -80,7 +80,7 @@ The model, that is shown in a form of confusion matrix, is showing the distribut
 
 ### Summary
 
-The baseline model, utilizing a RandomForestClassifier, was trained on a set of features encompassing temporal, climatic, and demand-related aspects to predict the cause categories of major power outages. Despite achieving a test accuracy of 54%, the model's performance varies across different cause categories, as indicated by the classification report. Notably, some categories, such as "severe weather," exhibit higher precision and recall, while others, like "equipment failure," struggle to be accurately predicted.
+The baseline model, utilizing a RandomForestClassifier, was trained on a set of features encompassing temporal, climatic, and demand-related aspects to predict the cause categories of major power outages. Despite achieving a test accuracy of 56%, the model's performance varies across different cause categories, as indicated by the classification report. Notably, some categories, such as "severe weather," exhibit higher precision and recall, while others, like "equipment failure," struggle to be accurately predicted.
 
 #### Model Evaluation:
 
@@ -109,11 +109,12 @@ In summary, while the baseline model provides a foundation, further refinement t
 ## Final Model
 ### Model Choosing and Features:
 The final model, aiming to predict the cause categories of major power outages, underwent significant improvements and fine-tuning. Unnecessary columns such as `'OUTAGE.START'` and `'OUTAGE.RESTORATION'` were dropped, and missing values were handled. This time we are going to add more features, and the chosen features include `'YEAR'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. Numeric features were scaled using StandardScaler, while categorical features underwent one-hot encoding.
+![](asset/final_model_test_accuracy.jpg)
 
 
 
 ### Model Performance
-Hyperparameter tuning was performed using GridSearchCV, optimizing parameters such as 'n_estimators', 'max_depth', and 'min_samples_split' for the RandomForestClassifier. The best hyperparameters were found to be {'max_depth': 32, 'min_samples_split': 16, 'n_estimators': 12}. The final model achieved an accuracy of 76.98% on the test set, showcasing a substantial improvement over the baseline model. 
+Hyperparameter tuning was performed using GridSearchCV, optimizing parameters such as 'n_estimators', 'max_depth', and 'min_samples_split' for the RandomForestClassifier. The best hyperparameters were found to be {'max_depth': 32, 'min_samples_split': 16, 'n_estimators': 12}. The final model achieved an accuracy of 78.42% on the test set, showcasing a substantial improvement over the baseline model. 
 
 ![](asset/confusionmatrix_final.jpg)
 
@@ -150,7 +151,7 @@ Alternative Hypothesis: The model is unfair. The accuracy for high-severity majo
 
 <iframe src="asset/p_graph.html" width=800 height=600 frameBorder=0></iframe>
 
-A permutation test is conducted by shuffing the `'HIGH_SEVERITY'` column in the dataset and calculating the fairness metric for 1000 iterations. The p-value is then deteremined as the proportion of shuffled fairness metric. And the resulting p-valeuu is 0.132.
+A permutation test is conducted by shuffing the `'HIGH_SEVERITY'` column in the dataset and calculating the fairness metric for 1000 iterations. The p-value is then deteremined as the proportion of shuffled fairness metric. And the resulting p-value is 0.011.
 
 ### Conclusion
-With a p-value of 0.132, which is greater than the signigicance level of 0.05, there is insufficient evidence to reject the null hypothesis. Therefore, we do not have significant statistical evidence to claim that the model is unfair with respect to power outage severity categories. Further monitoring and analysis may be necessary to ensure ongoing fairness as the mdoel is deployed in real-world scenarios. 
+With a p-value of 0.011, which is smaller than the signigicance level of 0.05, there is sufficient evidence to reject the null hypothesis. Therefore, we do have significant statistical evidence to claim that the model is unfair with respect to power outage severity categories. Further monitoring and analysis may be necessary to ensure ongoing fairness as the mdoel is deployed in real-world scenarios. 
