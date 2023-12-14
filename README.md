@@ -71,7 +71,7 @@ For encoding, the model applies one-hot encoding to the categorical feature `'HI
 
 ### Model Performance
 
-![](asset/base_model_test_accuracy.jpg0)
+![](asset/base_model_test_accuracy.jpg)
 The model achieved a test accuracy of 55%. The classification report provides additional insights into precision, recall, and F1-score for each cause category, indicating variable performance across different classes. The confusion matrix visualizes the model's predictions against the actual values, highlighting areas of correct and incorrect classification.
 
 The model, that is shown in a form of confusion matrix, is showing the distribution of the cause category in major power outage as below:
