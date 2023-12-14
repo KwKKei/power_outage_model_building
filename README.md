@@ -60,18 +60,62 @@ Accuracy is justified as the primary evaluation metric because it directly align
 
 ---
 
-# Baseline Model
+## Baseline Model
+### Model Description
+
+The baseline model utilizes a RandomForestClassifier to predict the `'CAUSE.CATEGORY'` of major power outages based on selected features, including `'YEAR'`, `'OUTAGE.START'`, `'OUTAGE.RESTORATION'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. The model employs preprocessing techniques such as imputation of missing values, scaling numerical features, and one-hot encoding categorical features.
+
+### Encoding 
+
+For encoding, the model applies one-hot encoding to the categorical feature `'HIGH_SEVERITY'`, transforming it into binary values. This encoding allows the model to interpret and incorporate this binary feature effectively in its predictions. The preprocessing steps aim to standardize and prepare the data for the RandomForestClassifier.
+
+### Model Performance
+
+![](asset/base_model_test_accuracy.jpg0)
+The model achieved a test accuracy of 55%. The classification report provides additional insights into precision, recall, and F1-score for each cause category, indicating variable performance across different classes. The confusion matrix visualizes the model's predictions against the actual values, highlighting areas of correct and incorrect classification.
+
+The model, that is shown in a form of confusion matrix, is showing the distribution of the cause category in major power outage as below:
+![](asset/confusionmatrix.jpg)
 
 
 
-## Model Description
+### Summary
+
+The baseline model, utilizing a RandomForestClassifier, was trained on a set of features encompassing temporal, climatic, and demand-related aspects to predict the cause categories of major power outages. Despite achieving a test accuracy of 54%, the model's performance varies across different cause categories, as indicated by the classification report. Notably, some categories, such as "severe weather," exhibit higher precision and recall, while others, like "equipment failure," struggle to be accurately predicted.
+
+#### Model Evaluation:
+
+The confusion matrix visualizes the model's predictions, illustrating areas of both correct and incorrect classifications. The model tends to misclassify certain cause categories, evident in the off-diagonal elements of the matrix. Understanding these misclassifications is crucial for refining the model and improving its predictive capabilities.
+
+#### Improvements and Additional Steps:
+
+To enhance the model's performance, several steps can be taken. Feature engineering may involve extracting more meaningful information from existing features or introducing new features that better capture the underlying patterns in the data. Hyperparameter tuning allows for optimizing the model's configuration to find the most effective parameters, potentially improving predictive accuracy which we will do in our final model.
+
+#### Handling Class Imbalance:
+
+Given the varying support across different cause categories, addressing class imbalance is crucial. Techniques such as oversampling minority classes or undersampling majority classes can be employed to create a more balanced training set. This can prevent the model from being biased towards predicting the majority class and improve its ability to discern patterns in less frequent causes of power outages.
+
+#### Incorporating Temporal and Spatial Context:
+
+Considering the temporal and spatial aspects of power outages might provide valuable insights. Feature engineering could involve creating new features that capture the seasonality of outages, regional patterns, or temporal trends, contributing to a more nuanced understanding of the causes.
+
+#### Advanced Model Architectures:
+
+Exploring more sophisticated model architectures or ensemble methods beyond the baseline RandomForestClassifier might yield improvements. Techniques like gradient boosting or neural networks may capture complex relationships within the data, enhancing the model's predictive capabilities.
+
+In summary, while the baseline model provides a foundation, further refinement through feature engineering, hyperparameter tuning, and addressing class imbalance is essential for creating a more accurate and robust predictive model for power outage cause classification.
+
+---
+
+## Final Model
+### Model Choosing and Features:
+The final model, aiming to predict the cause categories of major power outages, underwent significant improvements and fine-tuning. Unnecessary columns such as 'OUTAGE.START' and 'OUTAGE.RESTORATION' were dropped, and missing values were handled. The chosen features include `'YEAR'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. Numeric features were scaled using StandardScaler, while categorical features underwent one-hot encoding.
 
 
 
-## Encoding 
+### Model Performance
+Hyperparameter tuning was performed using GridSearchCV, optimizing parameters such as 'n_estimators', 'max_depth', and 'min_samples_split' for the RandomForestClassifier. The best hyperparameters were found to be {'max_depth': 32, 'min_samples_split': 16, 'n_estimators': 12}. The final model achieved an accuracy of 76.98% on the test set, showcasing a substantial improvement over the baseline model. 
 
 
-
-## Model Performance
-
-
+### Summary (please write this part more)
+The final model, with its refined features and optimized hyperparameters, serves as a robust tool for predicting the causes of major power outages. It provides valuable insights for proactive decision-making, allowing stakeholders to implement targeted preventive measures and minimize the impact of power disruptions. Continuous efforts to refine and update the model will contribute to its long-term efficacy in addressing the dynamic nature of power outage causes. 
