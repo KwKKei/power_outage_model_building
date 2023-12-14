@@ -11,8 +11,6 @@ Based on the investigation we concluded on the previous investigation, we would 
 
 Predicting the cause of a major power outage is crucial for preemptive mitigation and efficient response. Power outages have significant impacts on various sectors, disrupting critical services, industries, and daily life. Understanding the cause of a high-severity power outage allows for targeted preventive measures, such as infrastructure upgrades or maintenance, reducing the likelihood and duration of future disruptions. This proactive approach enhances overall grid reliability, minimizes economic losses, and ensures a more resilient and stable power supply.
 
-By predicting what cause are impacting the major power outages, we can gain a better understanding of the outage duration and case distribution of the outages and identify any specific detailed or vulnerabilities associ
-
 TO make accurate predictions, we are using the dataset on 1534 power outages cases from 200 to 2016, with 59 columns recording the information. Based one the question we investigate, this dataset includes various features such as the `'YEAR'`, `'CLIMATE.CATEGORY'`, `'OUTAGE.START'`, `'OUTAGE.RESTORATION'`, `'OUTAGE.DURATION'`, `'CAUSE.CATEGORY'`, `'CAUSE.CATEGORY.DETAIL'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, `'HIGH_SEVERITY'`, and the list goes on.
 
 By training a classification model usingthe data, we aim to complete a model that increase the accuracy in identify what the distribution of cause of mojor power outages in the following years. Training a classification model contributes to improved decision-making by enabling automated categorization of data, leading to more efficient and accurate predictions. In the future, this can enhance various fields such as healthcare, finance, and technology, fostering innovation, and streamlining processes for better outcomes and resource optimization. Finally, we wouldn't consider the time prediction in our model. 
@@ -63,7 +61,7 @@ Accuracy is justified as the primary evaluation metric because it directly align
 ## Baseline Model
 ### Model Description
 
-The baseline model utilizes a RandomForestClassifier to predict the `'CAUSE.CATEGORY'` of major power outages based on selected features, including `'YEAR'`, `'OUTAGE.START'`, `'OUTAGE.RESTORATION'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. The model employs preprocessing techniques such as imputation of missing values, scaling numerical features, and one-hot encoding categorical features.
+The baseline model utilizes a RandomForestClassifier to predict the `'CAUSE.CATEGORY'` of major power outages based on selected features, including only `'OUTAGE.DURATION'`, and `'CLIMATE.CATEGORY'`. The model employs preprocessing techniques such as imputation of missing values, scaling numerical features, and one-hot encoding categorical features.
 
 ### Encoding 
 
@@ -76,7 +74,7 @@ For encoding, the model applies one-hot encoding to the categorical feature `'HI
 The model achieved a test accuracy of 55%. The classification report provides additional insights into precision, recall, and F1-score for each cause category, indicating variable performance across different classes. The confusion matrix visualizes the model's predictions against the actual values, highlighting areas of correct and incorrect classification.
 
 The model, that is shown in a form of confusion matrix, is showing the distribution of the cause category in major power outage as below:
-![](asset/confusionmatrix.jpg)
+![](asset/confusionmatrix_base.jpg)
 
 
 
@@ -90,7 +88,7 @@ The confusion matrix visualizes the model's predictions, illustrating areas of b
 
 #### Improvements and Additional Steps:
 
-To enhance the model's performance, several steps can be taken. Feature engineering may involve extracting more meaningful information from existing features or introducing new features that better capture the underlying patterns in the data. Hyperparameter tuning allows for optimizing the model's configuration to find the most effective parameters, potentially improving predictive accuracy which we will do in our final model.
+According to the accuracy of the training test, it seems it is too low since there are too few features are taken into account. To enhance the model's performance, several steps can be taken. Feature engineering may involve extracting more meaningful information from existing features or introducing new features that better capture the underlying patterns in the data. Hyperparameter tuning allows for optimizing the model's configuration to find the most effective parameters, potentially improving predictive accuracy which we will do in our final model.
 
 #### Handling Class Imbalance:
 
@@ -110,13 +108,48 @@ In summary, while the baseline model provides a foundation, further refinement t
 
 ## Final Model
 ### Model Choosing and Features:
-The final model, aiming to predict the cause categories of major power outages, underwent significant improvements and fine-tuning. Unnecessary columns such as 'OUTAGE.START' and 'OUTAGE.RESTORATION' were dropped, and missing values were handled. The chosen features include `'YEAR'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. Numeric features were scaled using StandardScaler, while categorical features underwent one-hot encoding.
+The final model, aiming to predict the cause categories of major power outages, underwent significant improvements and fine-tuning. Unnecessary columns such as 'OUTAGE.START' and 'OUTAGE.RESTORATION' were dropped, and missing values were handled. This time we are going to add more features, and the chosen features include `'YEAR'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. Numeric features were scaled using StandardScaler, while categorical features underwent one-hot encoding.
 
 
 
 ### Model Performance
 Hyperparameter tuning was performed using GridSearchCV, optimizing parameters such as 'n_estimators', 'max_depth', and 'min_samples_split' for the RandomForestClassifier. The best hyperparameters were found to be {'max_depth': 32, 'min_samples_split': 16, 'n_estimators': 12}. The final model achieved an accuracy of 76.98% on the test set, showcasing a substantial improvement over the baseline model. 
 
+![](asset/confusionmatrix_final.jpg)
+
+Compare to the confusion matrix using the baseline model, you can see the distribution of the causes didn't changed that much; however, the difference is to include more features so the regoression line is fitting up to higher the accuracy. 
+
+
 
 ### Summary (please write this part more)
-The final model, with its refined features and optimized hyperparameters, serves as a robust tool for predicting the causes of major power outages. It provides valuable insights for proactive decision-making, allowing stakeholders to implement targeted preventive measures and minimize the impact of power disruptions. Continuous efforts to refine and update the model will contribute to its long-term efficacy in addressing the dynamic nature of power outage causes. 
+The final model, with its refined features and optimized hyperparameters, serves as a robust tool for predicting the causes of major power outages. It provides valuable insights for proactive decision-making, allowing stakeholders to implement targeted preventive measures and minimize the impact of power disruptions. Continuous efforts to refine and update the model will contribute to its long-term efficacy in addressing the dynamic nature of power outage causes. The final model demonstrates the significance of hyperparameter tuning and feature selection in enhancing predictive performance. Further improvements can be explored through additional feature engineering, considering temporal and spatial context, and addressing potential class imbalance. Continuous monitoring and periodic reevaluation of the model's performance are crucial to ensure its relevance and effectiveness over time.
+
+---
+
+## Fairness Analysis
+
+### Introduction 
+Fairness analysis is crucial to ensure that machine learning models do not exhibit disparitises across different groups. In this context, the analysis aims to evaluate the fairness of the model concerning power outage severity categories.
+
+### Group Selection 
+For the fairness analysis, two groups are considered:
+- Group X: High Severity Major Power Outages 
+- Group Y: Low Severity Major Power Outages
+
+
+### Evaluation Metric 
+The evaluation metric for fairness is the difference in model accuracy between Group X and Group Y.
+
+### Null Hypothesis 
+Null Hypothesis: THe model is fair accuracy for high-severity major outages and low-severity major outages is approximately the same, and any differences observde are due to random chance. 
+
+### Alternative Hypothesis
+Alternative Hypothesis: The model is unfair. The accuracy for high-severity major outages is significantly different from the accuracy for low-severity major outages.
+
+### Calculation of p-value
+A permutation test is conducted by shuffing the `'HIGH_SEVERITY'` column in the dataset and calculating the fairness metric for 1000 iterations. The p-value is then deteremined as the proportion of shuffled fairness metric. And the resulting p-valeuu is 0.132.
+
+### Conclusion
+With a p-value of 0.132, which is greater than the signigicance level of 0.05, there is insufficient evidence to reject the null hypothesis. Therefore, we do not have significant statistical evidence to claim that the model is unfair with respect to power outage severity categories. Further monitoring and analysis may be necessary to ensure ongoing fairness as the mdoel is deployed in real-world scenarios. 
+
+
