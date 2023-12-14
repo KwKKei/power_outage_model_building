@@ -16,7 +16,7 @@ To make accurate predictions, we are using the dataset on 1534 power outages cas
 By training a classification model usingthe data, we aim to complete a model that increase the accuracy in identify what the distribution of cause of mojor power outages in the following years. Training a classification model contributes to improved decision-making by enabling automated categorization of data, leading to more efficient and accurate predictions. In the future, this can enhance various fields such as healthcare, finance, and technology, fostering innovation, and streamlining processes for better outcomes and resource optimization. Finally, we wouldn't consider the time prediction in our model. 
 
 ## About the data cleaning 
-We would use the same data cleaning we did in the previous analysis, which can be found [here] (https://kwkkei.github.io/power_outage_investigation/). 
+We would use the same data cleaning we did in the previous analysis, which can be found [here](https://kwkkei.github.io/power_outage_investigation/). 
 
 In order to increase the readability and accuracy of our data, we have commit some changes to clean the original DataFrame we get. 
 
