@@ -7,16 +7,16 @@ by Max Yuen Sum Wong(y6wong@ucsd.edu), Chris Yuen Kei Wong(ykw001@ucsd.edu)
 This project will condcut an open-ended investigation into the dataset of the power outages dataset, then we will discussing a question with training a new model and compare with the original one in order to conduct some interesting analysis.
 
 ## Framing the Problem 
-Based on the investigation we concluded on the previous investigation, we would like to predict the number and severity og major power outages in the year 2024, which the dataset only contains the major power outage daat in the continental U.S. from January 2000 to July 2016. And we would like to discuss the porblem in predicting the cause of a High Serverrity power outage.
+Based on the investigation we concluded on the previous investigation, we would like to predict the number and severity of major power outages in the year 2024, which the dataset only contains the major power outage data in the continental U.S. from January 2000 to July 2016. And we would like to discuss the porblem in predicting the cause of a High Serverrity power outage.
 
-Predicting the cause of a major power outage is crucial for preemptive mitigation and efficient response. Power outages have significant impacts on various sectors, disrupting critical services, industries, and daily life. Understanding the cause of a high-severity power outage allows for targeted preventive measures, such as infrastructure upgrades or maintenance, reducing the likelihood and duration of future disruptions. This proactive approach enhances overall grid reliability, minimizes economic losses, and ensures a more resilient and stable power supply.
+Predicting the cause of a major power outage is crucial for efficient response. Power outages have significant impacts on various sectors, disrupting critical services, industries, and daily life. Understanding the cause of a high-severity power outage allows for targeted preventive measures, such as infrastructure upgrades or maintenance, reducing the likelihood and duration of future disruptions. This proactive approach enhances overall grid reliability, minimizes economic losses, and ensures a more resilient and stable power supply.
 
-TO make accurate predictions, we are using the dataset on 1534 power outages cases from 200 to 2016, with 59 columns recording the information. Based one the question we investigate, this dataset includes various features such as the `'YEAR'`, `'CLIMATE.CATEGORY'`, `'OUTAGE.START'`, `'OUTAGE.RESTORATION'`, `'OUTAGE.DURATION'`, `'CAUSE.CATEGORY'`, `'CAUSE.CATEGORY.DETAIL'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, `'HIGH_SEVERITY'`, and the list goes on.
+To make accurate predictions, we are using the dataset on 1534 power outages cases from 200 to 2016, with 59 columns recording the information. Based one the question we investigate, this dataset includes various features such as the `'YEAR'`, `'CLIMATE.CATEGORY'`, `'OUTAGE.START'`, `'OUTAGE.RESTORATION'`, `'OUTAGE.DURATION'`, `'CAUSE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, `'HIGH_SEVERITY'`, and the list goes on.
 
 By training a classification model usingthe data, we aim to complete a model that increase the accuracy in identify what the distribution of cause of mojor power outages in the following years. Training a classification model contributes to improved decision-making by enabling automated categorization of data, leading to more efficient and accurate predictions. In the future, this can enhance various fields such as healthcare, finance, and technology, fostering innovation, and streamlining processes for better outcomes and resource optimization. Finally, we wouldn't consider the time prediction in our model. 
 
 ## About the data cleaning 
-We would use the same data cleaning we did in the previous analysis, which can be found [here] (https://kwkkei.github.io/power_outage_investigation). 
+We would use the same data cleaning we did in the previous analysis, which can be found [here] (https://kwkkei.github.io/power_outage_investigation/). 
 
 In order to increase the readability and accuracy of our data, we have commit some changes to clean the original DataFrame we get. 
 
@@ -47,7 +47,7 @@ The response variable in the classification model is the `'CAUSE.CATEGORY'`, rep
 ## Features
 
 Two selected features for the classification model are `'YEAR'` and `'DEMAND.LOSS.MW'`. `'YEAR'` provides temporal information, while `'DEMAND.LOSS.MW'` represents the demand loss in megawatts during an outage. These features aim to capture both temporal and demand-related aspects that may influence the cause of power outages.
-A
+
 ## Metric for Evaluation 
 
 The chosen metric for model evaluation is accuracy, as it measures the proportion of correctly predicted cause categories among all predictions. Given the multi-class classification nature of predicting outage causes, accuracy provides a straightforward and interpretable measure of overall model performance.
@@ -121,7 +121,7 @@ Compare to the confusion matrix using the baseline model, you can see the distri
 
 
 
-### Summary (please write this part more)
+### Summary
 The final model, with its refined features and optimized hyperparameters, serves as a robust tool for predicting the causes of major power outages. It provides valuable insights for proactive decision-making, allowing stakeholders to implement targeted preventive measures and minimize the impact of power disruptions. Continuous efforts to refine and update the model will contribute to its long-term efficacy in addressing the dynamic nature of power outage causes. The final model demonstrates the significance of hyperparameter tuning and feature selection in enhancing predictive performance. Further improvements can be explored through additional feature engineering, considering temporal and spatial context, and addressing potential class imbalance. Continuous monitoring and periodic reevaluation of the model's performance are crucial to ensure its relevance and effectiveness over time.
 
 ---
