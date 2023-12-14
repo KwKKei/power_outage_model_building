@@ -108,7 +108,7 @@ In summary, while the baseline model provides a foundation, further refinement t
 
 ## Final Model
 ### Model Choosing and Features:
-The final model, aiming to predict the cause categories of major power outages, underwent significant improvements and fine-tuning. Unnecessary columns such as 'OUTAGE.START' and 'OUTAGE.RESTORATION' were dropped, and missing values were handled. This time we are going to add more features, and the chosen features include `'YEAR'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. Numeric features were scaled using StandardScaler, while categorical features underwent one-hot encoding.
+The final model, aiming to predict the cause categories of major power outages, underwent significant improvements and fine-tuning. Unnecessary columns such as `'OUTAGE.START'` and `'OUTAGE.RESTORATION'` were dropped, and missing values were handled. This time we are going to add more features, and the chosen features include `'YEAR'`, `'OUTAGE.DURATION'`, `'CLIMATE.CATEGORY'`, `'DEMAND.LOSS.MW'`, `'CUSTOMERS.AFFECTED'`, `'TOTAL.CUSTOMERS'`, and `'HIGH_SEVERITY'`. Numeric features were scaled using StandardScaler, while categorical features underwent one-hot encoding.
 
 
 
@@ -141,15 +141,16 @@ For the fairness analysis, two groups are considered:
 The evaluation metric for fairness is the difference in model accuracy between Group X and Group Y.
 
 ### Null Hypothesis 
-Null Hypothesis: THe model is fair accuracy for high-severity major outages and low-severity major outages is approximately the same, and any differences observde are due to random chance. 
+Null Hypothesis: The model is fair accuracy for high-severity major outages and low-severity major outages is approximately the same, and any differences observe are due to random chance. 
 
 ### Alternative Hypothesis
 Alternative Hypothesis: The model is unfair. The accuracy for high-severity major outages is significantly different from the accuracy for low-severity major outages.
 
 ### Calculation of p-value
+
+<iframe src="asset/p_graph.html" width=800 height=600 frameBorder=0></iframe>
+
 A permutation test is conducted by shuffing the `'HIGH_SEVERITY'` column in the dataset and calculating the fairness metric for 1000 iterations. The p-value is then deteremined as the proportion of shuffled fairness metric. And the resulting p-valeuu is 0.132.
 
 ### Conclusion
 With a p-value of 0.132, which is greater than the signigicance level of 0.05, there is insufficient evidence to reject the null hypothesis. Therefore, we do not have significant statistical evidence to claim that the model is unfair with respect to power outage severity categories. Further monitoring and analysis may be necessary to ensure ongoing fairness as the mdoel is deployed in real-world scenarios. 
-
-
